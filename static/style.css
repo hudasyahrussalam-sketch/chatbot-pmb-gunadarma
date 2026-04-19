@@ -23,6 +23,7 @@ body {
     backdrop-filter: blur(12px);
     padding: 20px;
     border-right: 1px solid rgba(255,255,255,0.05);
+    transition: 0.3s;
 }
 
 .logo {
@@ -57,6 +58,7 @@ body {
     cursor: pointer;
     transition: 0.3s;
     margin-bottom: 8px;
+    font-size: 14px;
 }
 
 .menu div:hover {
@@ -68,21 +70,20 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
 /* CHATBOX */
 .chatbox {
     flex: 1;
-    padding: 25px;
+    padding: 20px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
 }
 
 /* SCROLLBAR */
-.chatbox::-webkit-scrollbar {
-    width: 6px;
-}
+.chatbox::-webkit-scrollbar { width: 6px; }
 .chatbox::-webkit-scrollbar-thumb {
     background: rgba(168, 85, 247, 0.5);
     border-radius: 10px;
@@ -93,50 +94,47 @@ body {
     display: flex;
     width: 100%;
     margin-bottom: 15px;
+    align-items: flex-start;
 }
 
-.bot-row {
-    justify-content: flex-start;
-}
-
-.user-row {
-    justify-content: flex-end;
-}
+.bot-row { justify-content: flex-start; }
+.user-row { justify-content: flex-end; }
 
 /* MESSAGE */
 .message {
     display: inline-block;
-    max-width: 55%;
+    max-width: 75%;
     padding: 12px 14px;
     border-radius: 16px;
     white-space: pre-line;
     word-wrap: break-word;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
-/* BOT */
 .bot-message {
     background: rgba(124, 58, 237, 0.2);
     border: 1px solid rgba(168, 85, 247, 0.5);
+    border-bottom-left-radius: 4px;
+    max-width: 75%;
 }
 
-/* USER */
 .user-message {
     background: linear-gradient(135deg, #7c3aed, #a855f7);
     color: white;
-
-    max-width: fit-content;   /* 🔥 bikin ngikut isi */
-    width: auto;
+    border-bottom-right-radius: 4px;
+    max-width: 75%;
 }
 
 /* INPUT AREA */
 .input-area {
     display: flex;
-    padding: 15px;
+    padding: 12px 15px;
     background: rgba(30, 20, 60, 0.95);
     border-top: 1px solid rgba(255,255,255,0.05);
+    gap: 8px;
 }
 
-/* INPUT */
 input {
     flex: 1;
     padding: 12px;
@@ -145,26 +143,44 @@ input {
     outline: none;
     background: rgba(255,255,255,0.1);
     color: white;
+    font-size: 14px;
+    min-width: 0;
 }
 
-/* INPUT FOCUS */
 input:focus {
     box-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
 }
 
-/* BUTTON */
 .input-area button {
-    margin-left: 10px;
-    padding: 0 20px;
+    padding: 0 18px;
     border-radius: 10px;
     background: linear-gradient(135deg, #7c3aed, #9333ea);
     border: none;
     color: white;
     cursor: pointer;
+    font-size: 16px;
+    flex-shrink: 0;
 }
 
-.input-area button:hover {
-    transform: scale(1.05);
+.input-area button:hover { transform: scale(1.05); }
+
+/* TIMESTAMP */
+.time {
+    font-size: 10px;
+    opacity: 0.5;
+    margin-top: 4px;
+    display: block;
+}
+
+/* TYPING CURSOR */
+.typing-cursor {
+    display: inline-block;
+    animation: blink-cursor 0.7s infinite;
+}
+
+@keyframes blink-cursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
 /* TYPING DOTS */
@@ -177,7 +193,6 @@ input:focus {
     border-radius: 50%;
     animation: blink 1.4s infinite both;
 }
-
 .typing span:nth-child(2) { animation-delay: 0.2s; }
 .typing span:nth-child(3) { animation-delay: 0.4s; }
 
@@ -187,46 +202,125 @@ input:focus {
     100% { opacity: 0.2; }
 }
 
-/* ANIMATION */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* TIMESTAMP HALUS */
-.time {
-    font-size: 10px;
-    opacity: 0.5;
-    margin-top: 4px;
-    display: block;
-}
-
-.user-message {
-    max-width: 40%;
-}
-
-.bot-message {
-    max-width: 55%;
-}
-
-.chat-row {
-    margin-bottom: 15px;
+/* SUGGESTION */
+.suggestion-container {
+    margin-top: 10px;
     display: flex;
-    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
-.user-row {
-    justify-content: flex-end;
+.suggestion-item {
+    background: rgba(124, 58, 237, 0.3);
+    border: 1px solid rgba(168, 85, 247, 0.5);
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: 0.2s;
 }
 
-.user-row .message {
-    margin-left: auto;  /* 🔥 dorong ke kanan + auto shrink */
+.suggestion-item:hover {
+    background: rgba(124, 58, 237, 0.6);
 }
 
-.user-message {
-    border-bottom-right-radius: 4px;
+/* ─── MOBILE RESPONSIVE ─────────────────────────── */
+@media (max-width: 768px) {
+
+    .app {
+        flex-direction: column;
+        height: 100vh;
+        height: 100dvh; /* dynamic viewport untuk mobile */
+    }
+
+    /* Sidebar jadi header di mobile */
+    .sidebar {
+        width: 100%;
+        padding: 10px 15px;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+        overflow-x: auto;
+        flex-shrink: 0;
+    }
+
+    .logo {
+        margin-bottom: 0;
+        font-size: 16px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .sidebar button {
+        width: auto;
+        padding: 8px 14px;
+        margin-bottom: 0;
+        font-size: 12px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .menu {
+        display: flex;
+        flex-direction: row;
+        gap: 6px;
+        flex-shrink: 0;
+    }
+
+    .menu div {
+        padding: 8px 12px;
+        margin-bottom: 0;
+        font-size: 12px;
+        white-space: nowrap;
+        background: rgba(124, 58, 237, 0.2);
+        border: 1px solid rgba(168, 85, 247, 0.3);
+    }
+
+    /* Chatbox */
+    .chatbox {
+        padding: 12px;
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    /* Pesan lebih lebar di mobile */
+    .message {
+        max-width: 85%;
+        font-size: 13px;
+    }
+
+    .bot-message { max-width: 85%; }
+    .user-message { max-width: 85%; }
+
+    /* Input area */
+    .input-area {
+        padding: 10px 12px;
+        padding-bottom: max(10px, env(safe-area-inset-bottom));
+    }
+
+    input {
+        font-size: 16px; /* hindari zoom otomatis di iOS */
+        padding: 10px;
+    }
+
+    .input-area button {
+        padding: 0 14px;
+        font-size: 14px;
+    }
 }
 
-.bot-message {
-    border-bottom-left-radius: 4px;
+/* Layar sangat kecil */
+@media (max-width: 380px) {
+    .logo { font-size: 14px; }
+    .sidebar button { padding: 6px 10px; font-size: 11px; }
+    .menu div { padding: 6px 10px; font-size: 11px; }
+    .message { max-width: 90%; font-size: 12px; }
 }
