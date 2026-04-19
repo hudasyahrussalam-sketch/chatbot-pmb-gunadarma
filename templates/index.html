@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Gunadarma AI</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="sidebar">
+    <div class="logo">🎓 Gunadarma AI</div>
+
+    <button onclick="newChat()">+ Chat Baru</button>
+
+    <div class="menu">
+        <div onclick="quickAsk('Apa itu PMB dan bagaimana cara daftar?')">📌 PMB</div>
+        <div onclick="quickAsk('Apa saja beasiswa di Gunadarma?')">🎓 Beasiswa</div>
+        <div onclick="quickAsk('Apa saja jurusan di Gunadarma?')">📚 Jurusan</div>
+        <div onclick="quickAsk('Berapa biaya kuliah di Gunadarma?')">💰 Biaya</div>
+    </div>
+</div>
+
+<div class="main">
+
+<div id="chatbox" class="chatbox">
+    <div class="chat-row bot-row">
+        <div class="message bot-message">
+Halo! 👋  
+Saya siap membantu informasi PMB Universitas Gunadarma.
+
+Silakan pilih menu di samping atau ketik pertanyaan 😊
+        </div>
+    </div>
+</div>
+
+<div class="input-area">
+    <input id="message" placeholder="Ketik pertanyaan..." onkeypress="handleKey(event)">
+    <button onclick="sendMessage()">➤</button>
+</div>
+
+</div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

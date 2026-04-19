@@ -1,0 +1,66 @@
+[
+  {"question":"halo","answer":"Halo! Selamat datang di chatbot PMB Universitas Gunadarma. Ada yang bisa saya bantu?"},
+  {"question":"hai","answer":"Halo! Selamat datang di chatbot PMB Universitas Gunadarma. Ada yang bisa saya bantu?"},
+  {"question":"hello","answer":"Halo! Selamat datang di chatbot PMB Universitas Gunadarma. Ada yang bisa saya bantu?"},
+  {"question":"terima kasih","answer":"Sama-sama! Senang bisa membantu. Jangan ragu bertanya lagi ya!"},
+  {"question":"makasih","answer":"Sama-sama! Senang bisa membantu. Jangan ragu bertanya lagi ya!"},
+
+  {"question":"apa itu pmb","answer":"PMB adalah Penerimaan Mahasiswa Baru di Universitas Gunadarma. Pendaftaran dibuka setiap tahun secara online maupun offline."},
+  {"question":"cara daftar","answer":"Cara daftar PMB Gunadarma: 1) Kunjungi https://pendaftaran.gunadarma.ac.id, 2) Isi data diri seperti NISN, nama, pilihan jurusan, nomor HP, dan email, 3) Lakukan pembayaran formulir via Virtual Account Bank DKI, 4) Lengkapi data rapor dan unggah dokumen, 5) Tunggu hasil seleksi via email atau SMS."},
+  {"question":"bagaimana cara mendaftar","answer":"Cara daftar PMB Gunadarma: 1) Kunjungi https://pendaftaran.gunadarma.ac.id, 2) Isi data diri seperti NISN, nama, pilihan jurusan, nomor HP, dan email, 3) Lakukan pembayaran formulir via Virtual Account Bank DKI, 4) Lengkapi data rapor dan unggah dokumen, 5) Tunggu hasil seleksi via email atau SMS."},
+  {"question":"website pendaftaran","answer":"Website resmi pendaftaran PMB Universitas Gunadarma adalah https://pendaftaran.gunadarma.ac.id"},
+  {"question":"pendaftaran online","answer":"Pendaftaran PMB Gunadarma bisa dilakukan secara online melalui https://pendaftaran.gunadarma.ac.id tanpa harus datang ke kampus."},
+
+  {"question":"syarat pendaftaran","answer":"Syarat pendaftaran PMB Gunadarma: 1) Lulusan SMA/SMK/sederajat, 2) Memiliki email aktif, 3) Fotocopy KTP, 4) Scan nilai rapor semester 1-5, 5) Pas foto 4x6, 6) Mengisi formulir pendaftaran online, 7) Membayar biaya formulir pendaftaran."},
+  {"question":"dokumen yang dibutuhkan","answer":"Dokumen yang diperlukan untuk daftar PMB Gunadarma: scan rapor, fotocopy KTP, pas foto 4x6, dan ijazah SMA/SMK sederajat."},
+  {"question":"pakaian saat daftar","answer":"Saat datang ke kampus untuk pendaftaran, wajib berpakaian rapi dan sopan. Pria: kemeja (bukan kaos) dan celana bahan panjang. Wanita: blus atau blazer (bukan kaos) dan rok bahan."},
+
+  {"question":"jalur masuk","answer":"Universitas Gunadarma memiliki beberapa jalur masuk: 1) Jalur Reguler (ujian tertulis), 2) Jalur PMDK (prestasi akademik), 3) Jalur TryOut (berdasarkan hasil tryout online), 4) Jalur Beasiswa Penuh."},
+  {"question":"jalur reguler","answer":"Jalur Reguler adalah seleksi terbuka untuk semua calon mahasiswa umum melalui ujian tertulis. Siapa saja yang lulus ujian bisa kuliah di Gunadarma."},
+  {"question":"jalur pmdk","answer":"Jalur PMDK adalah seleksi berdasarkan prestasi akademik. Hasil seleksi diumumkan melalui email atau SMS setelah melengkapi data dan persyaratan."},
+  {"question":"jalur tryout","answer":"Jalur TryOut adalah jalur khusus bagi peserta yang mengikuti tryout online Gunadarma. Seleksi berdasarkan hasil tryout 3 mata pelajaran: Matematika, Bahasa Indonesia, dan Bahasa Inggris."},
+  {"question":"tes masuk","answer":"Informasi tes masuk tergantung jalur yang dipilih. Jalur Reguler menggunakan ujian tertulis, sedangkan jalur PMDK dan TryOut berdasarkan nilai akademik dan hasil tryout."},
+
+  {"question":"biaya formulir","answer":"Biaya formulir pendaftaran PMB Universitas Gunadarma adalah Rp350.000 dan bersifat non-refundable (tidak dapat dikembalikan)."},
+  {"question":"biaya kuliah","answer":"Biaya kuliah Gunadarma terdiri dari: 1) USP/uang pangkal (dibayar sekali), 2) BPP/SPP per semester, 3) Biaya per SKS sebesar Rp250.000. Total biaya S1 berkisar Rp88 juta hingga Rp96 juta tergantung jurusan dan grade."},
+  {"question":"berapa biaya kuliah","answer":"Biaya kuliah Gunadarma terdiri dari: 1) USP/uang pangkal (dibayar sekali), 2) BPP/SPP per semester, 3) Biaya per SKS sebesar Rp250.000. Total biaya S1 berkisar Rp88 juta hingga Rp96 juta tergantung jurusan dan grade."},
+  {"question":"uang pangkal","answer":"USP (Uang Sumbangan Pembangunan) atau uang pangkal dibayar satu kali di awal kuliah. Besarnya tergantung grade: Grade AA Rp22 juta, Grade A Rp26 juta, Grade B Rp30 juta."},
+  {"question":"usp","answer":"USP (Uang Sumbangan Pembangunan) dibayar satu kali di awal. Grade AA: Rp22 juta, Grade A: Rp26 juta, Grade B: Rp30 juta. Semakin bagus nilai seleksi, semakin ringan USP yang dibayar."},
+  {"question":"spp per semester","answer":"BPP atau SPP per semester untuk jurusan seperti Sistem Informasi dan Sistem Komputer sekitar Rp3.500.000. Besaran BPP berbeda tergantung program studi."},
+  {"question":"biaya sks","answer":"Biaya per SKS di Universitas Gunadarma adalah Rp250.000. Jumlah SKS yang diambil per semester mempengaruhi total biaya kuliah."},
+  {"question":"sistem grade","answer":"Sistem grade di Gunadarma menentukan besarnya USP yang dibayar. Grade AA mendapat potongan terbesar (USP Rp22 juta), Grade A potongan sedang (Rp26 juta), Grade B membayar penuh (Rp30 juta). Grade ditentukan dari hasil seleksi masuk."},
+  {"question":"biaya sistem informasi","answer":"Biaya kuliah Sistem Informasi Gunadarma: USP Grade AA Rp14.466.000, Grade A Rp15.133.000, Grade B Rp15.800.000. SPP per semester Rp3.500.000."},
+  {"question":"biaya informatika","answer":"Biaya kuliah Teknologi Informatika Gunadarma: USP Grade AA Rp14.966.000, Grade A Rp15.800.000, Grade B Rp16.633.000. SPP per semester Rp2.000.000."},
+  {"question":"cara bayar","answer":"Pembayaran biaya kuliah Gunadarma dilakukan melalui Virtual Account Bank DKI. Setiap mahasiswa dibuatkan rekening Bank DKI saat semester 1."},
+  {"question":"cicilan","answer":"Biaya USP (uang pangkal) di Gunadarma dapat dibayarkan secara bertahap bersamaan dengan biaya semester lain."},
+
+  {"question":"jurusan apa saja","answer":"Universitas Gunadarma memiliki banyak program studi antara lain: S1 Informatika, Sistem Informasi, Sistem Komputer, Teknik Elektro, Teknik Mesin, Teknik Industri, Teknik Sipil, Arsitektur, Manajemen, Akuntansi, Psikologi, Sastra Inggris, Desain Interior, Farmasi, dan masih banyak lagi."},
+  {"question":"program studi","answer":"Program studi di Gunadarma tersedia jenjang D3, S1, S2, dan S3. Bidang unggulan adalah teknologi informasi dan bisnis. Beberapa prodi memiliki akreditasi Unggul seperti Sistem Informasi, Teknik Industri, dan Sastra Inggris."},
+  {"question":"akreditasi","answer":"Universitas Gunadarma memiliki akreditasi A dari BAN-PT. Beberapa program studi dengan akreditasi Unggul antara lain Manajemen Pemasaran (D3), Teknik Komputer (D3), Sastra Inggris (S1), Sistem Informasi (S1), dan Teknik Industri (S1)."},
+  {"question":"jurusan terbaik","answer":"Jurusan unggulan di Gunadarma antara lain Sistem Informasi, Informatika, Sistem Komputer, Manajemen, dan Teknik Industri. Beberapa telah terakreditasi Unggul dari BAN-PT."},
+  {"question":"ada jurusan apa saja di gunadarma","answer":"Fakultas di Gunadarma meliputi: Ilmu Komputer, Teknologi Industri, Teknik Sipil dan Perencanaan, Ekonomi, Psikologi, Sastra dan Bahasa, serta beberapa program studi baru seperti Farmasi, Agroteknologi, dan Pariwisata."},
+  {"question":"kelas karyawan","answer":"Universitas Gunadarma menyediakan kelas reguler (pagi) dan kelas karyawan (malam) untuk beberapa program studi, cocok bagi yang sudah bekerja."},
+  {"question":"kelas malam","answer":"Tersedia kelas malam atau kelas karyawan di Gunadarma untuk beberapa program studi seperti Sistem Informasi, Teknik Industri, dan lainnya."},
+
+  {"question":"beasiswa","answer":"Universitas Gunadarma menyediakan beberapa program beasiswa: 1) Beasiswa Penuh untuk mahasiswa baru berprestasi, 2) Beasiswa Yayasan (YPKAAR) dari PT Adaro, 3) Beasiswa internal kampus untuk mahasiswa aktif berprestasi."},
+  {"question":"beasiswa penuh","answer":"Beasiswa Penuh Gunadarma diberikan untuk calon mahasiswa baru dengan syarat: nilai rapor minimal 80 di semua mata pelajaran (semester 1-5), memiliki nomor HP aktif, dan mengikuti proses seleksi. Info lebih lanjut di https://pmb-beasiswa.gunadarma.ac.id"},
+  {"question":"syarat beasiswa","answer":"Syarat beasiswa internal Gunadarma untuk mahasiswa aktif: IPK minimal 3.00 (S1) atau 2.85 (D3), semester 3-7, tidak sedang menerima beasiswa lain, dari keluarga berpenghasilan marginal, dan aktif di organisasi atau memiliki prestasi."},
+  {"question":"beasiswa yayasan","answer":"Beasiswa dari Yayasan YPKAAR (PT Adaro) tersedia untuk mahasiswa jurusan Sistem Komputer, Informatika, Teknik Industri, Teknik Elektro, Teknik Mesin, Teknik Sipil, dan lainnya. Kuota 20 mahasiswa per tahun."},
+  {"question":"cara daftar beasiswa","answer":"Untuk beasiswa penuh mahasiswa baru, kirimkan NISN, nama, dan nomor WA ke admin Gunadarma. Untuk beasiswa mahasiswa aktif, serahkan berkas ke Loket 30-31 Kampus Depok mulai pukul 10.00-15.00 WIB."},
+
+  {"question":"lokasi kampus","answer":"Universitas Gunadarma memiliki lebih dari 11 lokasi kampus tersebar di Jabodetabek dan Penajam Paser Utara. Kampus utama berada di Jl. Margonda Raya No.100, Pondok Cina, Depok."},
+  {"question":"alamat gunadarma","answer":"Kampus utama Gunadarma beralamat di Jl. Margonda Raya No.100, Pondok Cina, Depok 16424. Selain itu ada kampus di Jakarta, Bekasi, Tangerang, dan Penajam Paser Utara."},
+  {"question":"fasilitas kampus","answer":"Fasilitas Gunadarma antara lain: laboratorium lengkap, AC central di setiap ruangan, lift di setiap gedung, Bank DKI di setiap kampus, Lab Fotografi, Lab TV, Lab Radio, Lab Multimedia, dan Sport Center."},
+  {"question":"laboratorium","answer":"Gunadarma memiliki berbagai laboratorium seperti Lab Teknik Mesin, Lab Fisika, Lab Komputer, Lab Fotografi, Lab TV, Lab Radio, dan Lab Multimedia."},
+
+  {"question":"lama kuliah","answer":"Program D3 ditempuh selama 3 tahun (6 semester), program S1 selama 4 tahun (8 semester), program S2 sekitar 2 tahun, dan program S3 sekitar 3 tahun."},
+  {"question":"berapa lama kuliah s1","answer":"Program S1 di Gunadarma umumnya ditempuh selama 4 tahun atau 8 semester."},
+  {"question":"ada program d3","answer":"Ya, Gunadarma memiliki program D3 antara lain Manajemen Keuangan, Manajemen Pemasaran, Teknik Komputer, dan Akuntansi Komputer."},
+  {"question":"ada program s2","answer":"Ya, Gunadarma membuka program S2 (Magister) antara lain Magister Manajemen dan Magister Sistem Informasi."},
+
+  {"question":"kontak pmb","answer":"Untuk informasi lebih lanjut, hubungi PMB Gunadarma melalui: Telepon (021) 78881112, Email ppmb-ol@gunadarma.ac.id, atau datang langsung ke kampus Depok, Tangerang, atau Bekasi."},
+  {"question":"nomor telepon gunadarma","answer":"Nomor telepon PMB Universitas Gunadarma: (021) 78881112. Bisa juga email ke ppmb-ol@gunadarma.ac.id"},
+  {"question":"laptop","answer":"Gunadarma menghimbau setiap mahasiswanya memiliki laptop pribadi untuk memudahkan proses perkuliahan, terutama untuk praktikum dan tugas."},
+  {"question":"ranking gunadarma","answer":"Universitas Gunadarma berada di peringkat 17 di Indonesia versi Webometrics dan merupakan salah satu universitas swasta berbasis teknologi informasi terkemuka di Indonesia."},
+  {"question":"sejarah gunadarma","answer":"Gunadarma berdiri sejak 7 Agustus 1981 sebagai Program Pendidikan Ilmu Komputer (PPIK). Berkembang menjadi STMIK, lalu resmi menjadi Universitas Gunadarma pada tahun 1996."}
+]
