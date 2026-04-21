@@ -27,7 +27,12 @@ function handleKey(e) {
     if (e.key === "Enter") sendMessage();
 }
 
-window.onload = () => { loadChat(); };
+window.onload = () => {
+    loadChat();
+    // Auto scroll ke bawah saat halaman pertama dibuka
+    const chat = document.getElementById("chatbox");
+    chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
+};
 
 function saveChat(data) {
     localStorage.setItem("chat_history", JSON.stringify(data));
@@ -51,7 +56,8 @@ function loadChat() {
         chatbox.appendChild(row);
     });
 
-    chatbox.scrollTop = chatbox.scrollHeight;
+    // Auto scroll ke bawah setelah load riwayat
+    chatbox.scrollTo({ top: chatbox.scrollHeight, behavior: 'smooth' });
 }
 
 function newChat() {
@@ -99,7 +105,9 @@ async function sendMessage() {
     chat.appendChild(userRow);
     history.push({ sender: "user", text: message, time });
     input.value = "";
-    chat.scrollTop = chat.scrollHeight;
+
+    // Auto scroll setelah pesan user
+    chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
 
     /* BOT BUBBLE */
     let botRow    = document.createElement("div");
@@ -109,7 +117,9 @@ async function sendMessage() {
     botBubble.innerHTML = `<span class="typing-cursor">▍</span>`;
     botRow.appendChild(botBubble);
     chat.appendChild(botRow);
-    chat.scrollTop = chat.scrollHeight;
+
+    // Auto scroll setelah bubble bot muncul
+    chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
 
     /* STREAMING FETCH */
     let fullText = "";
@@ -131,18 +141,20 @@ async function sendMessage() {
             const chunk = decoder.decode(value, { stream: true });
             fullText   += chunk;
 
+            // Update bubble bot secara real-time
             botBubble.innerHTML =
                 fullText.replace(/\n/g, "<br>") +
                 `<span class="typing-cursor">▍</span>`;
 
-            chat.scrollTop = chat.scrollHeight;
+            // Auto scroll setiap ada token baru
+            chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
         }
 
     } catch (err) {
         fullText = "Terjadi kesalahan koneksi. Silakan coba lagi.";
     }
 
-    /* Selesai streaming */
+    /* Selesai streaming — hapus kursor, tambah timestamp */
     let timeSpan = document.createElement("span");
     timeSpan.className = "time";
     timeSpan.innerText = time;
@@ -150,11 +162,14 @@ async function sendMessage() {
     botBubble.innerHTML = fullText.replace(/\n/g, "<br>");
     botBubble.appendChild(timeSpan);
 
+    // Tampilkan suggestion jika bot tidak paham
     if (fullText.toLowerCase().includes("belum memiliki informasi")) {
         showSuggestions(botBubble);
     }
 
     history.push({ sender: "bot", text: fullText, time });
     saveChat(history);
-    chat.scrollTop = chat.scrollHeight;
+
+    // Auto scroll setelah jawaban selesai
+    chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
 }

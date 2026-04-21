@@ -8,12 +8,16 @@ body {
     font-family: 'Inter', sans-serif;
     background: linear-gradient(135deg, #1a1333, #2a1f5c);
     color: white;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
 }
 
 /* LAYOUT */
 .app {
     display: flex;
     height: 100vh;
+    height: 100dvh;
 }
 
 /* SIDEBAR */
@@ -23,7 +27,9 @@ body {
     backdrop-filter: blur(12px);
     padding: 20px;
     border-right: 1px solid rgba(255,255,255,0.05);
-    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
 }
 
 .logo {
@@ -31,6 +37,7 @@ body {
     font-weight: bold;
     font-size: 20px;
     color: #c084fc;
+    flex-shrink: 0;
 }
 
 /* BUTTON */
@@ -44,6 +51,7 @@ body {
     cursor: pointer;
     border-radius: 10px;
     transition: 0.3s;
+    flex-shrink: 0;
 }
 
 .sidebar button:hover {
@@ -71,6 +79,8 @@ body {
     display: flex;
     flex-direction: column;
     min-width: 0;
+    height: 100%;
+    overflow: hidden;
 }
 
 /* CHATBOX */
@@ -80,6 +90,7 @@ body {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    scroll-behavior: smooth;
 }
 
 /* SCROLLBAR */
@@ -133,6 +144,7 @@ body {
     background: rgba(30, 20, 60, 0.95);
     border-top: 1px solid rgba(255,255,255,0.05);
     gap: 8px;
+    flex-shrink: 0;
 }
 
 input {
@@ -183,30 +195,6 @@ input:focus {
     50% { opacity: 0; }
 }
 
-/* TYPING DOTS */
-.typing span {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    margin: 0 2px;
-    background: #c084fc;
-    border-radius: 50%;
-    animation: blink 1.4s infinite both;
-}
-.typing span:nth-child(2) { animation-delay: 0.2s; }
-.typing span:nth-child(3) { animation-delay: 0.4s; }
-
-@keyframes blink {
-    0% { opacity: 0.2; }
-    20% { opacity: 1; }
-    100% { opacity: 0.2; }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
 /* SUGGESTION */
 .suggestion-container {
     margin-top: 10px;
@@ -232,36 +220,51 @@ input:focus {
 /* ─── MOBILE RESPONSIVE ─────────────────────────── */
 @media (max-width: 768px) {
 
-    .app {
-        flex-direction: column;
-        height: 100vh;
-        height: 100dvh; /* dynamic viewport untuk mobile */
+    body {
+        height: 100dvh;
+        overflow: hidden;
     }
 
-    /* Sidebar jadi header di mobile */
+    .app {
+        flex-direction: column;
+        height: 100dvh;
+    }
+
+    /* Sidebar jadi sticky header di mobile */
     .sidebar {
         width: 100%;
-        padding: 10px 15px;
+        padding: 8px 12px;
         border-right: none;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-        display: flex;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
         flex-direction: row;
         align-items: center;
         gap: 8px;
         overflow-x: auto;
+        overflow-y: hidden;
         flex-shrink: 0;
+        /* Sticky agar selalu terlihat */
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        /* Sembunyikan scrollbar sidebar */
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .sidebar::-webkit-scrollbar {
+        display: none;
     }
 
     .logo {
         margin-bottom: 0;
-        font-size: 16px;
+        font-size: 15px;
         white-space: nowrap;
         flex-shrink: 0;
     }
 
     .sidebar button {
         width: auto;
-        padding: 8px 14px;
+        padding: 7px 12px;
         margin-bottom: 0;
         font-size: 12px;
         white-space: nowrap;
@@ -276,19 +279,30 @@ input:focus {
     }
 
     .menu div {
-        padding: 8px 12px;
+        padding: 7px 11px;
         margin-bottom: 0;
         font-size: 12px;
         white-space: nowrap;
         background: rgba(124, 58, 237, 0.2);
         border: 1px solid rgba(168, 85, 247, 0.3);
+        flex-shrink: 0;
     }
 
-    /* Chatbox */
-    .chatbox {
-        padding: 12px;
+    /* Main mengisi sisa layar */
+    .main {
         flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Chatbox scroll area */
+    .chatbox {
+        flex: 1;
+        padding: 12px;
         overflow-y: auto;
+        /* Pastikan tidak tertutup keyboard */
+        overscroll-behavior: contain;
     }
 
     /* Pesan lebih lebar di mobile */
@@ -300,14 +314,20 @@ input:focus {
     .bot-message { max-width: 85%; }
     .user-message { max-width: 85%; }
 
-    /* Input area */
+    /* Input area sticky di bawah */
     .input-area {
         padding: 10px 12px;
+        /* Ikuti safe area iPhone */
         padding-bottom: max(10px, env(safe-area-inset-bottom));
+        flex-shrink: 0;
+        position: sticky;
+        bottom: 0;
+        z-index: 100;
     }
 
     input {
-        font-size: 16px; /* hindari zoom otomatis di iOS */
+        /* Cegah zoom otomatis di iOS */
+        font-size: 16px;
         padding: 10px;
     }
 
@@ -319,8 +339,8 @@ input:focus {
 
 /* Layar sangat kecil */
 @media (max-width: 380px) {
-    .logo { font-size: 14px; }
+    .logo { font-size: 13px; }
     .sidebar button { padding: 6px 10px; font-size: 11px; }
-    .menu div { padding: 6px 10px; font-size: 11px; }
+    .menu div { padding: 6px 9px; font-size: 11px; }
     .message { max-width: 90%; font-size: 12px; }
 }
