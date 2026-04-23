@@ -6,7 +6,6 @@ const suggestions = [
     "Apakah ada beasiswa?"
 ];
 
-// Ambil riwayat chat dalam format yang dibutuhkan backend
 function getCleanHistory() {
     let data = localStorage.getItem("chat_history");
     if (!data) return [];
@@ -29,9 +28,10 @@ function handleKey(e) {
 
 window.onload = () => {
     loadChat();
-    // Auto scroll ke bawah saat halaman pertama dibuka
-    const chat = document.getElementById("chatbox");
-    chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
+    setTimeout(() => {
+        const chat = document.getElementById("chatbox");
+        chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
+    }, 100);
 };
 
 function saveChat(data) {
@@ -40,24 +40,39 @@ function saveChat(data) {
 
 function loadChat() {
     let chatbox = document.getElementById("chatbox");
-    let data    = localStorage.getItem("chat_history");
+    let data = localStorage.getItem("chat_history");
     if (!data) return;
 
     let messages = JSON.parse(data);
-    chatbox.innerHTML = "";
+    chatbox.innerHTML = '<div class="date-divider">Riwayat percakapan</div>';
 
     messages.forEach(msg => {
         let row = document.createElement("div");
         row.className = "chat-row " + (msg.sender === "user" ? "user-row" : "bot-row");
-        row.innerHTML = `
-            <div class="message ${msg.sender === "user" ? "user-message" : "bot-message"}">
-                ${msg.text}<span class="time">${msg.time || ""}</span>
-            </div>`;
+
+        if (msg.sender === "user") {
+            row.innerHTML = `
+                <div class="msg-wrap">
+                    <div class="msg-name" style="text-align:right">Kamu</div>
+                    <div class="message user-message">${msg.text}</div>
+                    <div class="msg-time" style="text-align:right">${msg.time || ""}</div>
+                </div>
+                <div class="avatar user-av">MH</div>`;
+        } else {
+            row.innerHTML = `
+                <div class="avatar bot-av">🤖</div>
+                <div class="msg-wrap">
+                    <div class="msg-name">Gunadarma AI</div>
+                    <div class="message bot-message">${msg.text}</div>
+                    <div class="msg-time">${msg.time || ""}</div>
+                </div>`;
+        }
         chatbox.appendChild(row);
     });
 
-    // Auto scroll ke bawah setelah load riwayat
-    chatbox.scrollTo({ top: chatbox.scrollHeight, behavior: 'smooth' });
+    setTimeout(() => {
+        chatbox.scrollTo({ top: chatbox.scrollHeight, behavior: 'smooth' });
+    }, 100);
 }
 
 function newChat() {
@@ -72,10 +87,10 @@ function quickAsk(text) {
 
 function showSuggestions(container) {
     let div = document.createElement("div");
-    div.className = "suggestion-container";
+    div.className = "suggestion-chips";
     suggestions.forEach(s => {
         let btn = document.createElement("div");
-        btn.className = "suggestion-item";
+        btn.className = "chip";
         btn.innerText = s;
         btn.onclick = () => {
             document.getElementById("message").value = s;
@@ -87,41 +102,53 @@ function showSuggestions(container) {
 }
 
 async function sendMessage() {
-    let input   = document.getElementById("message");
+    let input = document.getElementById("message");
     let message = input.value.trim();
     if (!message) return;
 
-    let chat    = document.getElementById("chatbox");
+    let chat = document.getElementById("chatbox");
     let history = JSON.parse(localStorage.getItem("chat_history")) || [];
-    let time    = getTime();
+    let time = getTime();
 
     /* USER MESSAGE */
     let userRow = document.createElement("div");
     userRow.className = "chat-row user-row";
     userRow.innerHTML = `
-        <div class="message user-message">
-            ${message}<span class="time">${time}</span>
-        </div>`;
+        <div class="msg-wrap">
+            <div class="msg-name" style="text-align:right">Kamu</div>
+            <div class="message user-message">${message}</div>
+            <div class="msg-time" style="text-align:right">${time}</div>
+        </div>
+        <div class="avatar user-av">MH</div>`;
     chat.appendChild(userRow);
     history.push({ sender: "user", text: message, time });
     input.value = "";
+    chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
 
-    // Auto scroll setelah pesan user
+    /* TYPING INDICATOR */
+    let typingRow = document.createElement("div");
+    typingRow.className = "chat-row bot-row";
+    typingRow.id = "typing-indicator";
+    typingRow.innerHTML = `
+        <div class="avatar bot-av">🤖</div>
+        <div class="msg-wrap">
+            <div class="msg-name">Gunadarma AI</div>
+            <div class="typing-bubble">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+        </div>`;
+    chat.appendChild(typingRow);
     chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
 
     /* BOT BUBBLE */
-    let botRow    = document.createElement("div");
+    let botRow = document.createElement("div");
     botRow.className = "chat-row bot-row";
     let botBubble = document.createElement("div");
     botBubble.className = "message bot-message";
     botBubble.innerHTML = `<span class="typing-cursor">▍</span>`;
-    botRow.appendChild(botBubble);
-    chat.appendChild(botRow);
 
-    // Auto scroll setelah bubble bot muncul
-    chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
-
-    /* STREAMING FETCH */
     let fullText = "";
 
     try {
@@ -131,7 +158,20 @@ async function sendMessage() {
             body: JSON.stringify({ message, history: getCleanHistory() })
         });
 
-        const reader  = res.body.getReader();
+        /* Hapus typing indicator saat mulai streaming */
+        let indicator = document.getElementById("typing-indicator");
+        if (indicator) indicator.remove();
+
+        botRow.innerHTML = `
+            <div class="avatar bot-av">🤖</div>
+            <div class="msg-wrap">
+                <div class="msg-name">Gunadarma AI</div>
+            </div>`;
+        botRow.querySelector(".msg-wrap").appendChild(botBubble);
+        chat.appendChild(botRow);
+        chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
+
+        const reader = res.body.getReader();
         const decoder = new TextDecoder();
 
         while (true) {
@@ -139,37 +179,42 @@ async function sendMessage() {
             if (done) break;
 
             const chunk = decoder.decode(value, { stream: true });
-            fullText   += chunk;
+            fullText += chunk;
 
-            // Update bubble bot secara real-time
             botBubble.innerHTML =
                 fullText.replace(/\n/g, "<br>") +
                 `<span class="typing-cursor">▍</span>`;
 
-            // Auto scroll setiap ada token baru
             chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
         }
 
     } catch (err) {
+        let indicator = document.getElementById("typing-indicator");
+        if (indicator) indicator.remove();
+
+        botRow.innerHTML = `
+            <div class="avatar bot-av">🤖</div>
+            <div class="msg-wrap">
+                <div class="msg-name">Gunadarma AI</div>
+            </div>`;
+        botRow.querySelector(".msg-wrap").appendChild(botBubble);
+        chat.appendChild(botRow);
         fullText = "Terjadi kesalahan koneksi. Silakan coba lagi.";
     }
 
-    /* Selesai streaming — hapus kursor, tambah timestamp */
-    let timeSpan = document.createElement("span");
-    timeSpan.className = "time";
-    timeSpan.innerText = time;
-
+    /* Selesai streaming */
     botBubble.innerHTML = fullText.replace(/\n/g, "<br>");
-    botBubble.appendChild(timeSpan);
 
-    // Tampilkan suggestion jika bot tidak paham
+    let timeDiv = document.createElement("div");
+    timeDiv.className = "msg-time";
+    timeDiv.innerText = time;
+    botRow.querySelector(".msg-wrap").appendChild(timeDiv);
+
     if (fullText.toLowerCase().includes("belum memiliki informasi")) {
         showSuggestions(botBubble);
     }
 
     history.push({ sender: "bot", text: fullText, time });
     saveChat(history);
-
-    // Auto scroll setelah jawaban selesai
     chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
 }
