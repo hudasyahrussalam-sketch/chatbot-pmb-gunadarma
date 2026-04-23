@@ -9,6 +9,18 @@
 </head>
 <body>
 
+<!-- POPUP NAMA -->
+<div id="name-overlay" class="name-overlay hidden">
+  <div class="name-popup">
+    <div class="name-popup-icon">🎓</div>
+    <div class="name-popup-title">Selamat Datang!</div>
+    <div class="name-popup-sub">Chatbot PMB Universitas Gunadarma 2026</div>
+    <div class="name-popup-label">Siapa nama kamu?</div>
+    <input id="name-input" class="name-popup-input" placeholder="Masukkan nama kamu..." maxlength="30" onkeypress="handleNameKey(event)">
+    <button class="name-popup-btn" onclick="saveName()">Mulai Chat ➤</button>
+  </div>
+</div>
+
 <div class="app">
 
   <!-- SIDEBAR -->
@@ -46,11 +58,12 @@
     </div>
 
     <div class="sidebar-footer">
-      <div class="user-avatar-sm">MH</div>
-      <div>
-        <div class="user-label">PMB Gunadarma</div>
-        <div class="user-name">2026</div>
+      <div class="user-avatar-sm" id="sidebar-avatar">?</div>
+      <div style="flex:1;min-width:0">
+        <div class="user-label">Pengguna</div>
+        <div class="user-name" id="sidebar-name">Tamu</div>
       </div>
+      <button class="edit-name-btn" onclick="editName()" title="Edit nama">✏️</button>
     </div>
   </div>
 
@@ -80,7 +93,7 @@
         <div class="avatar bot-av">🤖</div>
         <div class="msg-wrap">
           <div class="msg-name">Gunadarma AI</div>
-          <div class="message bot-message">
+          <div class="message bot-message" id="welcome-msg">
             Halo! Selamat datang di Chatbot PMB Universitas Gunadarma 2026.<br><br>
             Saya siap membantu menjawab pertanyaan kamu seputar pendaftaran, biaya kuliah, jurusan, dan beasiswa. Silakan mulai bertanya!
             <div class="suggestion-chips">

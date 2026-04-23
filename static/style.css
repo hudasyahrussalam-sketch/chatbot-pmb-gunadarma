@@ -13,12 +13,125 @@ body {
   overflow: hidden;
 }
 
-/* ── APP LAYOUT ─────────────────────────── */
 .app {
   display: flex;
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
+}
+
+/* ── NAME POPUP ───────────────────────────── */
+.name-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+.name-overlay.hidden {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.name-popup {
+  background: #1a1628;
+  border: 0.5px solid rgba(124,58,237,0.35);
+  border-radius: 20px;
+  padding: 32px 28px;
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: popUp 0.3s ease;
+}
+
+@keyframes popUp {
+  from { transform: scale(0.9) translateY(20px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.name-popup-icon {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  margin-bottom: 4px;
+}
+
+.name-popup-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #e2d9f3;
+}
+
+.name-popup-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.name-popup-label {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  align-self: flex-start;
+  margin-top: 8px;
+}
+
+.name-popup-input {
+  width: 100%;
+  background: rgba(255,255,255,0.07);
+  border: 0.5px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: #e2d9f3;
+  font-size: 14px;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  transition: 0.2s;
+}
+
+.name-popup-input:focus {
+  border-color: rgba(124,58,237,0.6);
+  background: rgba(124,58,237,0.08);
+}
+
+.name-popup-input::placeholder {
+  color: rgba(255,255,255,0.25);
+}
+
+.name-popup-btn {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 4px;
+  font-family: 'Inter', sans-serif;
+  transition: 0.2s;
+}
+
+.name-popup-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
 }
 
 /* ── SIDEBAR ─────────────────────────────── */
@@ -70,7 +183,6 @@ body {
   margin-top: 2px;
 }
 
-/* NEW CHAT BUTTON */
 .new-chat-btn {
   display: flex;
   align-items: center;
@@ -103,7 +215,6 @@ body {
   font-size: 14px;
 }
 
-/* MENU LABEL */
 .menu-label {
   font-size: 9px;
   color: rgba(255,255,255,0.2);
@@ -112,7 +223,6 @@ body {
   padding: 10px 6px 4px;
 }
 
-/* MENU ITEM */
 .menu-item {
   display: flex;
   align-items: center;
@@ -153,7 +263,6 @@ body {
   color: #c4b5fd;
 }
 
-/* SIDEBAR FOOTER */
 .sidebar-footer {
   margin-top: auto;
   padding-top: 12px;
@@ -187,6 +296,24 @@ body {
   font-size: 12px;
   color: #e2d9f3;
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.edit-name-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px;
+  border-radius: 6px;
+  transition: 0.2s;
+  flex-shrink: 0;
+}
+
+.edit-name-btn:hover {
+  background: rgba(255,255,255,0.08);
 }
 
 /* ── MAIN ─────────────────────────────────── */
@@ -290,7 +417,6 @@ body {
   border-radius: 4px;
 }
 
-/* DATE DIVIDER */
 .date-divider {
   display: flex;
   align-items: center;
@@ -444,7 +570,6 @@ body {
   40% { transform: translateY(-5px); opacity: 1; }
 }
 
-/* TYPING CURSOR */
 .typing-cursor {
   display: inline-block;
   animation: blink 0.7s infinite;
@@ -628,13 +753,16 @@ body {
     z-index: 100;
   }
 
-  .input-field {
-    font-size: 16px;
-  }
+  .input-field { font-size: 16px; }
 
   .send-btn {
     width: 38px;
     height: 38px;
+  }
+
+  .name-popup {
+    width: 90%;
+    padding: 28px 22px;
   }
 }
 
