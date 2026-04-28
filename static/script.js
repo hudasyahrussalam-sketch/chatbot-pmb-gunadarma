@@ -6,11 +6,39 @@ const suggestions = [
     "Apakah ada beasiswa?"
 ];
 
+/* ── THEME ──────────────────────────────── */
+function initTheme() {
+    // Default dark mode, tapi ikut preferensi yang tersimpan
+    let saved = localStorage.getItem("theme") || "dark";
+    applyTheme(saved);
+}
+
+function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+    const icon = document.getElementById("theme-icon");
+    const label = document.getElementById("theme-label");
+    const knob = document.getElementById("toggle-knob");
+    const toggle = document.getElementById("theme-toggle");
+    if (theme === "light") {
+        if (icon) icon.innerText = "☀️";
+        if (label) label.innerText = "Light Mode";
+        if (toggle) toggle.classList.add("active");
+    } else {
+        if (icon) icon.innerText = "🌙";
+        if (label) label.innerText = "Dark Mode";
+        if (toggle) toggle.classList.remove("active");
+    }
+}
+
+function toggleTheme() {
+    let current = document.documentElement.getAttribute("data-theme") || "dark";
+    applyTheme(current === "dark" ? "light" : "dark");
+}
+
 /* ── NAMA USER ──────────────────────────── */
 function getInitials(name) {
-    return name.trim().split(" ")
-        .map(w => w[0].toUpperCase())
-        .slice(0, 2).join("");
+    return name.trim().split(" ").map(w => w[0].toUpperCase()).slice(0, 2).join("");
 }
 
 function loadUserName() {
@@ -98,8 +126,69 @@ function handleKey(e) {
     if (e.key === "Enter") sendMessage();
 }
 
+/* ── HANDOFF ────────────────────────────── */
+function buildHandoffBox(type) {
+    let div = document.createElement("div");
+    div.className = "handoff-box";
+
+    if (type === "human") {
+        div.innerHTML = `
+            <div class="handoff-title">👤 Hubungi Tim PMB Gunadarma</div>
+            <div class="handoff-links">
+                <a class="handoff-link" href="https://wa.me/6287788119999" target="_blank">📱 WhatsApp Karawaci</a>
+                <a class="handoff-link" href="tel:02178881112" target="_blank">📞 Telepon PMB</a>
+                <a class="handoff-link" href="mailto:ppmb-ol@gunadarma.ac.id" target="_blank">✉️ Email PMB</a>
+            </div>`;
+    } else if (type === "website") {
+        div.innerHTML = `
+            <div class="handoff-title">🌐 Kunjungi Website Resmi</div>
+            <div class="handoff-links">
+                <a class="handoff-link" href="https://pendaftaran.gunadarma.ac.id/2026/" target="_blank">📝 Daftar Online</a>
+                <a class="handoff-link" href="https://www.gunadarma.ac.id" target="_blank">🏫 Website Gunadarma</a>
+                <a class="handoff-link" href="https://pmb-beasiswa.gunadarma.ac.id" target="_blank">🎓 Info Beasiswa</a>
+            </div>`;
+    } else if (type === "ikn") {
+        div.innerHTML = `
+            <div class="handoff-title">🏛️ Informasi Kampus IKN</div>
+            <div class="handoff-links">
+                <a class="handoff-link" href="https://www.gunadarma.ac.id" target="_blank">🌐 Website Resmi</a>
+                <a class="handoff-link" href="https://wa.me/6287788119999" target="_blank">📱 Tanya via WhatsApp</a>
+                <a class="handoff-link" href="mailto:ppmb-ol@gunadarma.ac.id" target="_blank">✉️ Email PMB</a>
+            </div>`;
+    }
+    return div;
+}
+
+function detectHandoff(text, userInput) {
+    const lower = userInput.toLowerCase();
+    const lowerText = text.toLowerCase();
+
+    // Deteksi IKN
+    if (lower.includes("ikn") || lower.includes("ibu kota") || lower.includes("nusantara") ||
+        lower.includes("kalimantan") || lower.includes("penajam")) {
+        return "ikn";
+    }
+
+    // Deteksi ingin bicara dengan manusia
+    if (lower.includes("hubungi") || lower.includes("kontak") || lower.includes("cs") ||
+        lower.includes("admin") || lower.includes("petugas") || lower.includes("staf") ||
+        lower.includes("manusia") || lower.includes("operator") || lower.includes("whatsapp") ||
+        lower.includes("telepon") || lower.includes("telpon") || lower.includes("call")) {
+        return "human";
+    }
+
+    // Deteksi dari respons bot — jika bot tidak tahu
+    if (lowerText.includes("belum memiliki informasi") || lowerText.includes("tidak dapat") ||
+        lowerText.includes("silakan kunjungi") || lowerText.includes("website resmi")) {
+        return "website";
+    }
+
+    return null;
+}
+
 /* ── INIT ───────────────────────────────── */
 window.onload = () => {
+    initTheme();
     loadUserName();
     loadChat();
     setTimeout(() => {
@@ -223,7 +312,6 @@ async function sendMessage() {
     chat.appendChild(typingRow);
     chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
 
-    /* BOT BUBBLE */
     let botRow = document.createElement("div");
     botRow.className = "chat-row bot-row";
     let botBubble = document.createElement("div");
@@ -279,13 +367,19 @@ async function sendMessage() {
 
     /* Selesai streaming */
     botBubble.innerHTML = fullText.replace(/\n/g, "<br>");
+
     let timeDiv = document.createElement("div");
     timeDiv.className = "msg-time";
     timeDiv.innerText = time;
     botRow.querySelector(".msg-wrap").appendChild(timeDiv);
 
-    if (fullText.toLowerCase().includes("belum memiliki informasi")) {
+    /* HANDOFF DETECTION */
+    let handoffType = detectHandoff(fullText, message);
+    if (handoffType) {
+        botRow.querySelector(".msg-wrap").appendChild(buildHandoffBox(handoffType));
+    } else if (fullText.toLowerCase().includes("belum memiliki informasi")) {
         showSuggestions(botBubble);
+        botRow.querySelector(".msg-wrap").appendChild(buildHandoffBox("website"));
     }
 
     history.push({ sender: "bot", text: fullText, time });
