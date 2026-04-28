@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,6 +55,17 @@
     <div class="menu-item" onclick="quickAsk('Berapa biaya kuliah di Gunadarma?')">
       <div class="menu-icon" style="background:rgba(251,191,36,0.15)">💰</div>
       <span class="menu-text">Rincian Biaya</span>
+    </div>
+
+    <div class="menu-label" style="margin-top:8px">Tampilan</div>
+
+    <!-- DARK/LIGHT TOGGLE -->
+    <div class="theme-toggle-wrap">
+      <span class="theme-icon" id="theme-icon">🌙</span>
+      <span class="theme-label" id="theme-label">Dark Mode</span>
+      <div class="toggle-switch" id="theme-toggle" onclick="toggleTheme()">
+        <div class="toggle-knob" id="toggle-knob"></div>
+      </div>
     </div>
 
     <div class="sidebar-footer">
